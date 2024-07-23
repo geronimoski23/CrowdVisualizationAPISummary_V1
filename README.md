@@ -1,5 +1,4 @@
 # Crowd Visualization Project
----
 
 
 ### Project Goal
