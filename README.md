@@ -257,7 +257,3 @@ This format shows the client that the particular device stayed in the CC buildin
 ---
 With these four APIs, we can create a server that can display an interactive heatmap and a device's trajectory. In order to improve upon the existing design, some ideas we will explore in the future include adding a database for users so that the historical data can be stored and called upon when needed or to predict where a user wants to go next at a specific time. Another way we could improve upon the design is to read wifi syslog data in real-time when creating the heatmap.
 
-
-```python
-
-```
