@@ -1,13 +1,13 @@
 # Crowd Visualization Project
 
 
-### Project Goal
+## Project Goal
 
 This project aims to use data obtained from wifi syslogs from buildings around the UMass Amherst campus to display a heatmap of the campus at a specific minute in the day. In order to do this, raw data from previous years was processed and stored in CSV files containing information about devices and their connections to access points within the various buildings on campus. Through data manipulation and file reading, we created an API view using the Django web framework to display the necessary and relevant information for our front end to call and display on an interactive heatmap using the leaflet javascript library.
 
-### Backend Version 1.0
+## Backend Version 1.0
 
-#### Campus Occupancy
+### Campus Occupancy
 
 The goal for this API was to return building information for all the buildings on campus which would allow the client to display a heatmap with both minute and hour granularity. In order to create the API, we first had to go through the CSV data and figure out what each column meant and what data was relevant for the heatmap display. We determined that the only information we needed were the start and end times of each connection made to an endpoint within the building and the building. 
 
@@ -100,7 +100,7 @@ When looking at minute granularity, the endpoint would be *http://localhost:8000
 The response would show the same stats except the count would be lower as it would only show devices connected to the building at the exact minute of 1:00 pm. 
 
 
-#### Building Occupancy
+### Building Occupancy
 
 In addition to seeing the campus view of the heatmap, we also wanted to add more interaction and information for the building. To do this, we created another api at the building level which shows the information specific to the building when called upon. At the minute granularity level, no new information is provided other than how many floors the building has. For example, using the same time previously and the building, Knowlton Hall (KNWL), the endpoint would be, http://localhost:8000/api/v1/building/KNWL/datetime/2021-03-01T13:00/?granularity=minute and the json response would be:
 
@@ -131,8 +131,8 @@ When switching to hour granularity, more statistics are provided for the buildin
 ```
 
 
-#### Access Point Occupancy
----
+### Access Point Occupancy
+
 The last API we added was one to show occupancy at different access points within a specific building. Since we did not have access to floor plans for any of the buildings given, we generated random latitude and longitude points for each access point within the building in order to demonstrate how this api call could be displayed by the client. The api returns a response similar to the format of the campus api but instead of a building, it returns and access point. In addition to this, the api filters each access point by floor in order to allow the client to display each floor's occupancy with ease. For example, an access point within the Life Sciences Lab is named "LSL-S473-1" which would mean that it is an access point on the fourth floor. 
 
 An portion of the response for level 5 of the LSL building with minute granularity with the endpoint http://localhost:8000/api/v1/building/LSL/datetime/2021-03-01T13:00/access_point/?level=5&granularity=minute would be:
@@ -191,7 +191,7 @@ If we were to switch it to hour granularity, the endpoint would be http://localh
 
 
 
-#### Trajectory
+### Trajectory View
 
 The goal of processing the trajectory data was to process the data in such a way that the client could display each building that a device visited throughout the day. The information we recieved from the trajectory data was a list of device ids and each building or access point they had connected to throughout the day, as well as the time they stayed at each building or access point. We processed the data from the original csv to only include non-duplicate device ids and to only show data for devices that stayed in two or more unqiue buildings for longer than 10 minutes. The data we accounted for followed the format:
 
@@ -252,7 +252,7 @@ The endpoint for the api response requires the date for the trajectory data and 
 This format shows the client that the particular device stayed in the CC building from 12:02 am to 7:11 am, stayed in the CC building form 9:01 am to 9:24 am, and the PRIN building from 9:37 am to 10:55 am.
 
 
-### Conclusion
+## Conclusion
 
 With these four APIs, we can create a server that can display an interactive heatmap and a device's trajectory. In order to improve upon the existing design, some ideas we will explore in the future include adding a database for users so that the historical data can be stored and called upon when needed or to predict where a user wants to go next at a specific time. Another way we could improve upon the design is to read wifi syslog data in real-time when creating the heatmap.
 
